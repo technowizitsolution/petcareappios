@@ -696,11 +696,11 @@ const AppointmentBookingScreen = () => {
   );
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      style={{flex: 1}}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}>
-      <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{flex: 1}}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}>
         <ScrollView style={styles.container}>
           <Text style={styles.mainTitle}>Book an Appointment</Text>
           {/* Common Fields Section */}
@@ -947,8 +947,8 @@ const AppointmentBookingScreen = () => {
 
         {/* Date Time Modal */}
         {renderDateTimeModal()}
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -1031,7 +1031,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    paddingBottom: Platform.OS === 'ios' ? 40 : 0,
+    paddingBottom: 20,
+    minHeight: 200,
+    justifyContent: 'flex-end', // Move picker to bottom, remove top space
   },
   modalHeader: {
     flexDirection: 'row',
@@ -1071,9 +1073,10 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   iosPickerModal: {
-    height: 30,
+    height: 216, // Standard iOS picker height
     width: '100%',
-    marginBottom: 30,
+    marginBottom: 0, // Remove extra margin
+    alignSelf: 'center',
   },
   formGroupLast: {
     marginBottom: 0,
